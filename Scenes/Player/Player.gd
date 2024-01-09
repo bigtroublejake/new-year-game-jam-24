@@ -21,7 +21,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(coyote_jump_timer.time_left)
 	gravity_handle(delta)
 	
 	if is_on_floor():
