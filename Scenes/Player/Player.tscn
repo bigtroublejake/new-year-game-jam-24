@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnd5gv03gy6jh"]
+
+[ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_jjvbn"]
+[ext_resource type="Texture2D" uid="uid://bmnkwgc8kp0kf" path="res://icon.svg" id="2_djb18"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_jjvbn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_djb18")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(64, 64, -64, 64, -64, -64, 64, -64)
+
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

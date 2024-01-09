@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://r27yov2ux8cy"]
+
+[ext_resource type="Script" path="res://Scenes/Starting Scene/Starting Scene.gd" id="1_i1flc"]
+[ext_resource type="PackedScene" uid="uid://bnd5gv03gy6jh" path="res://Scenes/Player/Player.tscn" id="2_7wavv"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_i1flc")
+
+[node name="Test Platform" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Test Platform"]
+polygon = PackedVector2Array(64, 448, 704, 448, 1024, 384, 1152, 384, 1152, 576, 64, 576)
+
+[node name="Polygon2D" type="Polygon2D" parent="Test Platform/CollisionPolygon2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_7wavv")]
+position = Vector2(512, 320)
+scale = Vector2(0.45, 0.45)
+floor_snap_length = 8.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
