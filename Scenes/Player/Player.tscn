@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnd5gv03gy6jh"]
+[gd_scene load_steps=4 format=3 uid="uid://bnd5gv03gy6jh"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_jjvbn"]
 [ext_resource type="Texture2D" uid="uid://bmnkwgc8kp0kf" path="res://icon.svg" id="2_djb18"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8mmv"]
+size = Vector2(142.222, 142.222)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_jjvbn")
@@ -19,3 +22,10 @@ one_shot = true
 [node name="JumpBufferTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="ActionableFinder" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionableFinder"]
+shape = SubResource("RectangleShape2D_p8mmv")

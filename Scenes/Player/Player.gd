@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
 
+@onready var actionable_finder: Area2D = $ActionableFinder
+
 const SPEED = 430.0
 const JUMP_VELOCITY = -400.0
 const ACCELERATION = 1_300.0
@@ -18,9 +20,22 @@ var airJumpCount : int
 func _ready() -> void:
 	pass # Replace with function body.
 
-
+var dialogue_begin = 0 #dialogue has not commenced
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#if Input.is_action_just_pressed("ui_accept"):
+	
+	var actionables = actionable_finder.get_overlapping_areas()
+	if actionables.size() > 0 && dialogue_begin == 0:
+		dialogue_begin = 1
+		actionables[0].action()
+	elif actionables.size() <= 0:
+		dialogue_begin = 0 #run this when outside of dialogue
+		
+		#DialogueManager.show_example_dialogue_balloon(load("res://dialogue/main.dialogue"), "start")
+		#return
+		
+	
 	gravity_handle(delta)
 	
 	if is_on_floor():
