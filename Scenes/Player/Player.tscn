@@ -7,13 +7,11 @@
 size = Vector2(142.222, 142.222)
 
 [node name="Player" type="CharacterBody2D"]
+floor_snap_length = 8.0
 script = ExtResource("1_jjvbn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_djb18")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(64, 64, -64, 64, -64, -64, 64, -64)
 
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
 wait_time = 0.15
@@ -22,6 +20,7 @@ one_shot = true
 [node name="JumpBufferTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
 
 [node name="ActionableFinder" type="Area2D" parent="."]
 collision_layer = 0
