@@ -118,17 +118,20 @@ func _take_damage():
 func _power_up():
 		SPEED = SPEED*2
 		$power_timer.start()
+		print("SPEED UP {0}".format([SPEED]))
 		
 func _on_power_timer_timeout():
 	SPEED = SPEED/2
+	print("SLOW BACK DOWN {0}".format([SPEED]))
 
 
 func _weapon_pickup():
 	has_weapon = true
 
 func _attack(attackPress):
-	if attackPress == true:
-		print("yes")
+	if has_weapon == true:
+		if attackPress == true:
+			print("yes")
 
 # For when we add animations
 #func update_animations(inputDir):

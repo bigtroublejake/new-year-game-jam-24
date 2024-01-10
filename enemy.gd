@@ -25,12 +25,14 @@ func _on_detection_area_body_entered(body):
 	if body != null:
 		player = body
 		player_chase = true
+		print("enemy_script : CHASING")
 
 	
 	
 func _on_detection_area_body_exited(body):
 	player = null
 	player_chase = false
+	print("enemy_script : NO LONGER CHASING")
 	
 
 
