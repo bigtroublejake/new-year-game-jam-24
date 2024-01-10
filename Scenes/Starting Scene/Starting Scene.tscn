@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://r27yov2ux8cy"]
+[gd_scene load_steps=5 format=3 uid="uid://r27yov2ux8cy"]
 
 [ext_resource type="Script" path="res://Scenes/Starting Scene/Starting Scene.gd" id="1_i1flc"]
 [ext_resource type="PackedScene" uid="uid://bnd5gv03gy6jh" path="res://Scenes/Player/Player.tscn" id="2_7wavv"]
 [ext_resource type="PackedScene" uid="uid://b3t4ewrh13hqf" path="res://Scenes/Starting Scene/enemy.tscn" id="3_b1uok"]
+[ext_resource type="PackedScene" uid="uid://dru6ok5cw3qna" path="res://power_up.tscn" id="4_ujstg"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_i1flc")
@@ -11,14 +12,15 @@ script = ExtResource("1_i1flc")
 position = Vector2(-60, -67)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Test Platform"]
-polygon = PackedVector2Array(64, 448, 704, 448, 1024, 384, 1152, 384, 1152, 576, 64, 576)
+polygon = PackedVector2Array(64, 448, 572, 469, 827, 461, 1184, 350, 1152, 576, 64, 576)
 
 [node name="Polygon2D" type="Polygon2D" parent="Test Platform/CollisionPolygon2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_7wavv")]
 position = Vector2(497, 296)
 scale = Vector2(0.45, 0.45)
-collision_layer = 3
+collision_layer = 7
+collision_mask = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -26,3 +28,6 @@ collision_layer = 3
 position = Vector2(81, 294)
 floor_snap_length = 8.0
 speed = 40
+
+[node name="power_up" parent="." instance=ExtResource("4_ujstg")]
+position = Vector2(1000, 0)

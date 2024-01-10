@@ -23,6 +23,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	print(SPEED)
 	gravity_handle(delta)
 	if is_on_floor():
 		airJumpCount = 0
@@ -88,6 +89,15 @@ func friction_handle(delta, inputDir):
 
 func _take_damage():
 	print("dead")
+	
+	
+#For power up effect
+func _power_up():
+		SPEED = SPEED*2
+		$power_timer.start()
+		
+func _on_power_timer_timeout():
+	SPEED = SPEED/2
 
 # For when we add animations
 #func update_animations(inputDir):
@@ -102,5 +112,8 @@ func _take_damage():
 		#animated_sprite_2d.play("jump")
 	#elif velocity.y >0:
 		#animated_sprite_2d.play("fall")
+
+
+
 
 

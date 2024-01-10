@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dru6ok5cw3qna"]
+
+[ext_resource type="Script" path="res://power_up.gd" id="1_g1j3o"]
+[ext_resource type="Texture2D" uid="uid://bmnkwgc8kp0kf" path="res://icon.svg" id="2_103si"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0alc1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_103si")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_23v8v"]
+size = Vector2(121, 114)
+
+[node name="power_up" type="CharacterBody2D"]
+script = ExtResource("1_g1j3o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0alc1")
+
+[node name="detection" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
+position = Vector2(0.5, 1)
+scale = Vector2(1.1, 1.1)
+shape = SubResource("RectangleShape2D_23v8v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_23v8v")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
+[connection signal="ready" from="Timer" to="." method="_on_timer_ready"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
