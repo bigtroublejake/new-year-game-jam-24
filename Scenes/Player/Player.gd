@@ -5,10 +5,10 @@ extends CharacterBody2D
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
 
-const SPEED = 430.0
-const JUMP_VELOCITY = -400.0
-const ACCELERATION = 1_300.0
-const MAX_DOUBLE_JUMPS = 1
+@export var SPEED : float = 430
+@export var JUMP_VELOCITY : float = -400
+@export var ACCELERATION : float = 1_300
+@export var MAX_DOUBLE_JUMPS : int = 1
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var airJumpCount : int

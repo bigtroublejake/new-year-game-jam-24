@@ -11,6 +11,8 @@ var startPos : Vector2
 func _ready() -> void:
 	polygon_2d.polygon = collision_polygon_2d.polygon
 	startPos = player.position
+	polygon_2d.color = Color.BLUE
+	RenderingServer.set_default_clear_color(Color.CADET_BLUE)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
