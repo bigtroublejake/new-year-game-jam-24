@@ -49,8 +49,11 @@ func _process(delta: float) -> void:
 		airJumpCount = 0
 	
 	var attackPress = Input.is_action_just_pressed("player_attack")
-	if isAttacking == false:
-		$weapon_slash.play("idle")
+	if has_weapon == true:
+		if isAttacking == false:
+			$weapon_slash.play("idle")
+	else:
+		$weapon_slash.visible = false
 	_attack(attackPress)
 	
 	# Handle jump.
@@ -164,9 +167,5 @@ func _on_weapon_slash_animation_finished():
 
 
 
-
-func _on_weapon_slash_animation_looped():
-	print("mh")
-	
 
 

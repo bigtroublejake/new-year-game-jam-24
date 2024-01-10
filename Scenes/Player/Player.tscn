@@ -97,7 +97,6 @@ collision_mask = 16
 shape = SubResource("RectangleShape2D_p8mmv")
 
 [node name="weapon_slash" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(93, -7.75)
 scale = Vector2(2.5, 2.51563)
 sprite_frames = SubResource("SpriteFrames_0s7mu")
