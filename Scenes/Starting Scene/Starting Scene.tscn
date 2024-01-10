@@ -1,21 +1,59 @@
-[gd_scene load_steps=3 format=3 uid="uid://r27yov2ux8cy"]
+[gd_scene load_steps=4 format=3 uid="uid://r27yov2ux8cy"]
 
 [ext_resource type="Script" path="res://Scenes/Starting Scene/Starting Scene.gd" id="1_i1flc"]
 [ext_resource type="PackedScene" uid="uid://bnd5gv03gy6jh" path="res://Scenes/Player/Player.tscn" id="2_7wavv"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xr3w"]
+size = Vector2(130, 256)
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_i1flc")
 
-[node name="Test Platform" type="StaticBody2D" parent="."]
+[node name="Test Platforms" type="StaticBody2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Test Platform"]
-polygon = PackedVector2Array(64, 448, 704, 448, 1024, 384, 1152, 384, 1152, 576, 64, 576)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Test Platforms"]
+position = Vector2(-64, 64)
+polygon = PackedVector2Array(64, 448, 3776, 448, 3776, 960, 64, 960)
 
-[node name="Polygon2D" type="Polygon2D" parent="Test Platform/CollisionPolygon2D"]
+[node name="Polygon2D" type="Polygon2D" parent="Test Platforms/CollisionPolygon2D"]
+color = Color(0, 0.588235, 0, 1)
+antialiased = true
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Test Platforms"]
+position = Vector2(-232, 136)
+polygon = PackedVector2Array(2472, 184, 2472, -456, 3944, -456, 3944, 184)
+
+[node name="Polygon2D" type="Polygon2D" parent="Test Platforms/CollisionPolygon2D2"]
+color = Color(0.430488, 0.501963, 0.478041, 1)
+antialiased = true
+
+[node name="Area2D" type="Area2D" parent="Test Platforms"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Test Platforms/Area2D"]
+position = Vector2(2712, 416)
+shape = SubResource("RectangleShape2D_3xr3w")
+
+[node name="Timer" type="Timer" parent="Test Platforms/Area2D"]
+one_shot = true
 
 [node name="Player" parent="." instance=ExtResource("2_7wavv")]
 position = Vector2(512, 320)
 scale = Vector2(0.45, 0.45)
-floor_snap_length = 8.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Placeholder Text Nodes" type="Node2D" parent="."]
+z_index = -1
+
+[node name="TextEdit" type="TextEdit" parent="Placeholder Text Nodes"]
+offset_left = 408.0
+offset_top = 24.0
+offset_right = 516.0
+offset_bottom = 86.0
+scale = Vector2(10, 10)
+text = "Sky with city
+"
+scroll_fit_content_height = true
+
+[connection signal="body_entered" from="Test Platforms/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Test Platforms/Area2D/Timer" to="." method="_on_timer_timeout"]
