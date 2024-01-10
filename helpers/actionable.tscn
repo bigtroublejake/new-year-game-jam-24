@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgy3f6rfxqyx3"]
+[gd_scene load_steps=3 format=3 uid="uid://bgy3f6rfxqyx3"]
 
 [ext_resource type="Script" path="res://helpers/actionable.gd" id="1_wlr2f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hnn88"]
+size = Vector2(160, 104)
 
 [node name="Actionable" type="Area2D"]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_wlr2f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(984, 356)
+shape = SubResource("RectangleShape2D_hnn88")

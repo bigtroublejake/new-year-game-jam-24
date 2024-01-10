@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://r27yov2ux8cy"]
+[gd_scene load_steps=7 format=3 uid="uid://r27yov2ux8cy"]
 
 [ext_resource type="Script" path="res://Scenes/Starting Scene/Starting Scene.gd" id="1_i1flc"]
 [ext_resource type="PackedScene" uid="uid://bnd5gv03gy6jh" path="res://Scenes/Player/Player.tscn" id="2_7wavv"]
@@ -8,9 +8,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jy1pf"]
 size = Vector2(97.5, 103)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2lnq"]
-size = Vector2(160, 104)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_i1flc")
@@ -42,7 +39,3 @@ texture = ExtResource("3_dkncc")
 
 [node name="Actionable" parent="Andrew" instance=ExtResource("4_o5k5c")]
 dialogue_resource = ExtResource("5_ppl5r")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Andrew/Actionable"]
-position = Vector2(984, 356)
-shape = SubResource("RectangleShape2D_k2lnq")
