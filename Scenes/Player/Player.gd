@@ -1,30 +1,55 @@
 class_name Player
 extends CharacterBody2D
 
+
+
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
 
-@export var SPEED : float = 430
-@export var JUMP_VELOCITY : float = -400
-@export var ACCELERATION : float = 1_300
-@export var MAX_DOUBLE_JUMPS : int = 1
+@onready var actionable_finder: Area2D = $ActionableFinder
+
+var SPEED = 430.0
+var JUMP_VELOCITY = -400.0
+var ACCELERATION = 1_300.0
+var MAX_DOUBLE_JUMPS = 1
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var airJumpCount : int
+var has_weapon = false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
+var dialogue_begin = 0 #dialogue has not commenced
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	gravity_handle(delta)
+
+
+
+	#if Input.is_action_just_pressed("ui_accept"):
 	
+	var actionables = actionable_finder.get_overlapping_areas()
+	if actionables.size() > 0 && dialogue_begin == 0:
+		dialogue_begin = 1
+		actionables[0].action()
+	elif actionables.size() <= 0:
+		dialogue_begin = 0 #run this when outside of dialogue
+		
+		#DialogueManager.show_example_dialogue_balloon(load("res://dialogue/main.dialogue"), "start")
+		#return
+		
+	
+
+
+	gravity_handle(delta)
 	if is_on_floor():
 		airJumpCount = 0
+	
+	var attackPress = Input.is_action_just_pressed("player_attack")
+	_attack(attackPress)
 	
 	# Handle jump.
 	var jumpPress = Input.is_action_just_pressed("ui_accept")
@@ -85,6 +110,26 @@ func friction_handle(delta, inputDir):
 			velocity.x = move_toward(velocity.x, 0, ACCELERATION/3 *delta)
 
 
+func _take_damage():
+	print("dead")
+	
+	
+#For power up effect
+func _power_up():
+		SPEED = SPEED*2
+		$power_timer.start()
+		
+func _on_power_timer_timeout():
+	SPEED = SPEED/2
+
+
+func _weapon_pickup():
+	has_weapon = true
+
+func _attack(attackPress):
+	if attackPress == true:
+		print("yes")
+
 # For when we add animations
 #func update_animations(inputDir):
 	#if inputDir:
@@ -98,5 +143,8 @@ func friction_handle(delta, inputDir):
 		#animated_sprite_2d.play("jump")
 	#elif velocity.y >0:
 		#animated_sprite_2d.play("fall")
+
+
+
 
 
