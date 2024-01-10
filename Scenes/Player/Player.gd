@@ -9,10 +9,10 @@ extends CharacterBody2D
 
 @onready var actionable_finder: Area2D = $ActionableFinder
 
-const SPEED = 430.0
-const JUMP_VELOCITY = -400.0
-const ACCELERATION = 1_300.0
-const MAX_DOUBLE_JUMPS = 1
+var SPEED = 430.0
+var JUMP_VELOCITY = -400.0
+var ACCELERATION = 1_300.0
+var MAX_DOUBLE_JUMPS = 1
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var airJumpCount : int

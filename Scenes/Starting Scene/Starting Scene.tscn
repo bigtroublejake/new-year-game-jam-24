@@ -16,7 +16,8 @@ script = ExtResource("1_i1flc")
 position = Vector2(-60, -67)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Test Platform"]
-polygon = PackedVector2Array(64, 448, 572, 469, 827, 461, 1184, 350, 1152, 576, 64, 576)
+position = Vector2(-4, 19)
+polygon = PackedVector2Array(60, 451, 1212, 451, 1212, 579, 60, 579)
 
 [node name="Polygon2D" type="Polygon2D" parent="Test Platform/CollisionPolygon2D"]
 
