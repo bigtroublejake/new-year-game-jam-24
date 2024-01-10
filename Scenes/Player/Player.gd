@@ -14,6 +14,7 @@ extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var airJumpCount : int
+var has_weapon = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -23,10 +24,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(SPEED)
 	gravity_handle(delta)
 	if is_on_floor():
 		airJumpCount = 0
+	
+	var attackPress = Input.is_action_just_pressed("player_attack")
+	_attack(attackPress)
 	
 	# Handle jump.
 	var jumpPress = Input.is_action_just_pressed("ui_accept")
@@ -98,6 +101,14 @@ func _power_up():
 		
 func _on_power_timer_timeout():
 	SPEED = SPEED/2
+
+
+func _weapon_pickup():
+	has_weapon = true
+
+func _attack(attackPress):
+	if attackPress == true:
+		print("yes")
 
 # For when we add animations
 #func update_animations(inputDir):

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://r27yov2ux8cy"]
+[gd_scene load_steps=6 format=3 uid="uid://r27yov2ux8cy"]
 
 [ext_resource type="Script" path="res://Scenes/Starting Scene/Starting Scene.gd" id="1_i1flc"]
 [ext_resource type="PackedScene" uid="uid://bnd5gv03gy6jh" path="res://Scenes/Player/Player.tscn" id="2_7wavv"]
 [ext_resource type="PackedScene" uid="uid://b3t4ewrh13hqf" path="res://Scenes/Starting Scene/enemy.tscn" id="3_b1uok"]
 [ext_resource type="PackedScene" uid="uid://dru6ok5cw3qna" path="res://power_up.tscn" id="4_ujstg"]
+[ext_resource type="PackedScene" uid="uid://ohyd44hvyr41" path="res://weapon.tscn" id="5_rp4uu"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_i1flc")
@@ -31,3 +32,6 @@ speed = 40
 
 [node name="power_up" parent="." instance=ExtResource("4_ujstg")]
 position = Vector2(1000, 0)
+
+[node name="weapon" parent="." instance=ExtResource("5_rp4uu")]
+position = Vector2(611, 178)

@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://ohyd44hvyr41"]
+
+[ext_resource type="Script" path="res://weapon.gd" id="1_o58tg"]
+[ext_resource type="Texture2D" uid="uid://bmnkwgc8kp0kf" path="res://icon.svg" id="2_n76hd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0alc1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n76hd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_23v8v"]
+size = Vector2(121, 114)
+
+[node name="weapon" type="CharacterBody2D"]
+script = ExtResource("1_o58tg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_0alc1")
+
+[node name="detection" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
+scale = Vector2(0.26, 0.26)
+shape = SubResource("RectangleShape2D_23v8v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.25, 0.25)
+shape = SubResource("RectangleShape2D_23v8v")
+
+[connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
