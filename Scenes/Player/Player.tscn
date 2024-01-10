@@ -23,15 +23,12 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(53, -62, 55, -62, 55, -61, 56, -61, 56, -60, 57, -60, 57, -59, 58, -59, 58, -58, 59, -58, 59, -57, 60, -57, 60, -56, 61, -56, 61, -55, 62, -55, 62, -53, 63, -53, 63, 53, 62, 53, 62, 55, 61, 55, 61, 56, 60, 56, 60, 57, 59, 57, 59, 58, 58, 58, 58, 59, 57, 59, 57, 60, 56, 60, 56, 61, 55, 61, 55, 62, 53, 62, 53, 63, -53, 63, -53, 62, -55, 62, -55, 61, -56, 61, -56, 60, -57, 60, -57, 59, -58, 59, -58, 58, -59, 58, -59, 57, -60, 57, -60, 56, -61, 56, -61, 55, -62, 55, -62, 53, -63, 53, -63, -53, -62, -53, -62, -55, -61, -55, -61, -56, -60, -56, -60, -57, -59, -57, -59, -58, -58, -58, -58, -59, -57, -59, -57, -60, -56, -60, -56, -61, -55, -61, -55, -62, -53, -62, -53, -63, 53, -63)
 
 [node name="power_timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
-
-[connection signal="timeout" from="power_timer" to="." method="_on_power_timer_timeout"]
 
 [node name="ActionableFinder" type="Area2D" parent="."]
 collision_layer = 0
@@ -40,3 +37,4 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionableFinder"]
 shape = SubResource("RectangleShape2D_p8mmv")
 
+[connection signal="timeout" from="power_timer" to="." method="_on_power_timer_timeout"]

@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://r27yov2ux8cy"]
+[gd_scene load_steps=10 format=3 uid="uid://dct4f7eoibmke"]
 
 [ext_resource type="Script" path="res://Scenes/Starting Scene/Starting Scene.gd" id="1_i1flc"]
 [ext_resource type="PackedScene" uid="uid://bnd5gv03gy6jh" path="res://Scenes/Player/Player.tscn" id="2_7wavv"]
 [ext_resource type="Texture2D" uid="uid://cmpm0sbdpb6v6" path="res://assets/slug.png" id="3_dkncc"]
 [ext_resource type="PackedScene" uid="uid://bgy3f6rfxqyx3" path="res://helpers/actionable.tscn" id="4_o5k5c"]
 [ext_resource type="Resource" uid="uid://t3da65sjedq3" path="res://dialogue/main.dialogue" id="5_ppl5r"]
+[ext_resource type="PackedScene" uid="uid://ohyd44hvyr41" path="res://weapon.tscn" id="6_bkjc7"]
+[ext_resource type="PackedScene" uid="uid://dru6ok5cw3qna" path="res://power_up.tscn" id="7_3dgph"]
+[ext_resource type="PackedScene" uid="uid://b3t4ewrh13hqf" path="res://Scenes/Starting Scene/enemy.tscn" id="7_mpwan"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jy1pf"]
 size = Vector2(97.5, 103)
@@ -42,3 +45,13 @@ texture = ExtResource("3_dkncc")
 
 [node name="Actionable" parent="Andrew" instance=ExtResource("4_o5k5c")]
 dialogue_resource = ExtResource("5_ppl5r")
+
+[node name="weapon" parent="." instance=ExtResource("6_bkjc7")]
+position = Vector2(299, 193)
+
+[node name="power_up" parent="." instance=ExtResource("7_3dgph")]
+position = Vector2(57, 154)
+
+[node name="enemy" parent="." instance=ExtResource("7_mpwan")]
+position = Vector2(704, 79)
+speed = 25
