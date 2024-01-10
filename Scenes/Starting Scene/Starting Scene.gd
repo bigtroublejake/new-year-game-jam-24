@@ -7,12 +7,16 @@ extends Node2D
 
 var startPos : Vector2
 
+
+@onready var collision_shape2d = $"Test Platform/CollisionPolygon2D"
+@onready var sprite2d = $"Test Platform/CollisionPolygon2D/Polygon2D"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	polygon_2d.polygon = collision_polygon_2d.polygon
 	startPos = player.position
-	polygon_2d.color = Color.BLUE
-	RenderingServer.set_default_clear_color(Color.CADET_BLUE)
+	
+	sprite2d.polygon = collision_polygon_2d.polygon
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,3 +25,4 @@ func _process(delta: float) -> void:
 	
 	if player.position.y >= 500:
 		player.position = startPos
+	
