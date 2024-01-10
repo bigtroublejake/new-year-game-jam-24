@@ -25,7 +25,7 @@ polygon = PackedVector2Array(60, 451, 1212, 451, 1212, 579, 60, 579)
 [node name="Polygon2D" type="Polygon2D" parent="Test Platform/CollisionPolygon2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_7wavv")]
-position = Vector2(497, 296)
+position = Vector2(451, 327)
 scale = Vector2(0.45, 0.45)
 collision_layer = 7
 collision_mask = 5

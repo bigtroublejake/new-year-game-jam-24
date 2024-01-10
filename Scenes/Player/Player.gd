@@ -17,7 +17,7 @@ var MAX_DOUBLE_JUMPS = 1
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var airJumpCount : int
 var has_weapon = false
-
+var isAttacking = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -49,6 +49,8 @@ func _process(delta: float) -> void:
 		airJumpCount = 0
 	
 	var attackPress = Input.is_action_just_pressed("player_attack")
+	if isAttacking == false:
+		$weapon_slash.play("idle")
 	_attack(attackPress)
 	
 	# Handle jump.
@@ -127,11 +129,21 @@ func _on_power_timer_timeout():
 
 func _weapon_pickup():
 	has_weapon = true
+	$weapon_slash.visible = true
 
 func _attack(attackPress):
 	if has_weapon == true:
 		if attackPress == true:
+			$weapon_slash.play("slash")
+			$weapon_slash/weapon_area/weapon_collision.disabled = false;
 			print("yes")
+			isAttacking = true;
+			
+
+func _on_weapon_slash_animation_finished():
+	if $weapon_slash.animation == "slash":
+		isAttacking = false;
+		$weapon_slash/weapon_area/weapon_collision.disabled = true;
 
 # For when we add animations
 #func update_animations(inputDir):
@@ -149,5 +161,12 @@ func _attack(attackPress):
 
 
 
+
+
+
+
+func _on_weapon_slash_animation_looped():
+	print("mh")
+	
 
 

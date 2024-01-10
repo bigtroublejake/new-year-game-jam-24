@@ -1,10 +1,69 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnd5gv03gy6jh"]
+[gd_scene load_steps=13 format=3 uid="uid://bnd5gv03gy6jh"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_jjvbn"]
 [ext_resource type="Texture2D" uid="uid://bmnkwgc8kp0kf" path="res://icon.svg" id="2_djb18"]
+[ext_resource type="Texture2D" uid="uid://p7ml18kn34oh" path="res://Sprites/sword_pixel.png" id="3_wkvnb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8mmv"]
 size = Vector2(142.222, 142.222)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tfhj"]
+atlas = ExtResource("3_wkvnb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01gnx"]
+atlas = ExtResource("3_wkvnb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n65ic"]
+atlas = ExtResource("3_wkvnb")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ombn"]
+atlas = ExtResource("3_wkvnb")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvhq1"]
+atlas = ExtResource("3_wkvnb")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kup5a"]
+atlas = ExtResource("3_wkvnb")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0s7mu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tfhj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01gnx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n65ic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ombn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvhq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kup5a")
+}],
+"loop": false,
+"name": &"slash",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2u5p7"]
+size = Vector2(18, 18.1677)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_jjvbn")
@@ -37,4 +96,21 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionableFinder"]
 shape = SubResource("RectangleShape2D_p8mmv")
 
+[node name="weapon_slash" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(93, -7.75)
+scale = Vector2(2.5, 2.51563)
+sprite_frames = SubResource("SpriteFrames_0s7mu")
+animation = &"slash"
+
+[node name="weapon_area" type="Area2D" parent="weapon_slash"]
+
+[node name="weapon_collision" type="CollisionShape2D" parent="weapon_slash/weapon_area"]
+position = Vector2(6.2, -1.35093)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_2u5p7")
+disabled = true
+
 [connection signal="timeout" from="power_timer" to="." method="_on_power_timer_timeout"]
+[connection signal="animation_finished" from="weapon_slash" to="." method="_on_weapon_slash_animation_finished"]
+[connection signal="animation_looped" from="weapon_slash" to="." method="_on_weapon_slash_animation_looped"]
