@@ -11,13 +11,12 @@ extends Node2D
 # Rest of the nodes
 @onready var player : Player = $Player
 @onready var camera_2d: Camera2D = $Camera2D
-@onready var fade_timer = $"Test Platforms/Area2D/Timer"
 
 var startPos : Vector2
 
 
-@onready var collision_shape2d = $"Test Platform/CollisionPolygon2D"
-@onready var sprite2d = $"Test Platform/CollisionPolygon2D/Polygon2D"
+@onready var collision_shape2d = $"Test Platforms/CollisionPolygon2D"
+@onready var sprite2d = $"Test Platforms/CollisionPolygon2D/Polygon2D"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,11 +39,8 @@ func _process(delta: float) -> void:
 func _on_area_2d_body_entered(body):
 	if body == player:
 		await Fade.fade_out().finished
-		fade_timer.start()
 		print("Scene transition")
+		body.position = startPos
+		Fade.fade_in()
 
 
-# REMOVE THIS ONCE WE HAVE A SCENE TO TRANSITION TO
-func _on_timer_timeout():
-	Fade.fade_in()
-	
