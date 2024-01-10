@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+
+
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
@@ -22,7 +24,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	gravity_handle(delta)
-	
 	if is_on_floor():
 		airJumpCount = 0
 	
@@ -84,6 +85,9 @@ func friction_handle(delta, inputDir):
 			#floor friction
 			velocity.x = move_toward(velocity.x, 0, ACCELERATION/3 *delta)
 
+
+func _take_damage():
+	print("dead")
 
 # For when we add animations
 #func update_animations(inputDir):
