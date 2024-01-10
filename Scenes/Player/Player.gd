@@ -112,8 +112,8 @@ func friction_handle(delta, inputDir):
 
 func _take_damage():
 	print("dead")
-	
-	
+
+
 #For power up effect
 func _power_up():
 		SPEED = SPEED*2
@@ -127,8 +127,9 @@ func _weapon_pickup():
 	has_weapon = true
 
 func _attack(attackPress):
-	if attackPress == true:
-		print("yes")
+	if has_weapon == true:
+		if attackPress == true:
+			print("attack")
 
 # For when we add animations
 #func update_animations(inputDir):

@@ -1,17 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3t4ewrh13hqf"]
+[gd_scene load_steps=6 format=3 uid="uid://b3t4ewrh13hqf"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1_ksq26"]
-[ext_resource type="Texture2D" uid="uid://bmnkwgc8kp0kf" path="res://icon.svg" id="2_ett8o"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g6mka"]
-atlas = ExtResource("2_ett8o")
-region = Rect2(0, 0, 128, 128)
+[ext_resource type="Script" path="res://Scenes/Slime Enemy/enemy.gd" id="1_yi3wr"]
+[ext_resource type="Texture2D" uid="uid://b00v2ovebyuny" path="res://Sprites/Lumerie Slime/Lumerie_Slime_BaseSprite.png" id="2_fwgxw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ymf8y"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g6mka")
+"texture": ExtResource("2_fwgxw")
 }],
 "loop": true,
 "name": &"default",
@@ -25,18 +21,18 @@ radius = 296.108
 size = Vector2(116.5, 114.5)
 
 [node name="enemy" type="CharacterBody2D"]
-script = ExtResource("1_ksq26")
+script = ExtResource("1_yi3wr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.5, 0)
+scale = Vector2(2.08, 2.08)
 sprite_frames = SubResource("SpriteFrames_ymf8y")
 
 [node name="detection_area" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
-visible = false
 shape = SubResource("CircleShape2D_e60kr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
