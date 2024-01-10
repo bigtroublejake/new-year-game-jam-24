@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://r27yov2ux8cy"]
+[gd_scene load_steps=7 format=3 uid="uid://r27yov2ux8cy"]
 
 [ext_resource type="Script" path="res://Scenes/Starting Scene/Starting Scene.gd" id="1_i1flc"]
 [ext_resource type="PackedScene" uid="uid://bnd5gv03gy6jh" path="res://Scenes/Player/Player.tscn" id="2_7wavv"]
+[ext_resource type="Texture2D" uid="uid://cmpm0sbdpb6v6" path="res://assets/slug.png" id="3_dkncc"]
+[ext_resource type="PackedScene" uid="uid://bgy3f6rfxqyx3" path="res://helpers/actionable.tscn" id="4_o5k5c"]
+[ext_resource type="Resource" uid="uid://t3da65sjedq3" path="res://dialogue/main.dialogue" id="5_ppl5r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jy1pf"]
+size = Vector2(97.5, 103)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_i1flc")
@@ -19,3 +25,17 @@ scale = Vector2(0.45, 0.45)
 floor_snap_length = 8.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Andrew" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Andrew"]
+position = Vector2(1088, 320)
+shape = SubResource("RectangleShape2D_jy1pf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Andrew/CollisionShape2D"]
+position = Vector2(-3.8743e-05, 8.00001)
+scale = Vector2(0.05, 0.103704)
+texture = ExtResource("3_dkncc")
+
+[node name="Actionable" parent="Andrew" instance=ExtResource("4_o5k5c")]
+dialogue_resource = ExtResource("5_ppl5r")
