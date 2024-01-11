@@ -19,7 +19,6 @@ func gravity_handle(delta):
 
 func _physics_process(delta):
 	gravity_handle(delta)
-	print(velocity.x)
 	
 	if player_chase:
 		if player.position.x > position.x:
