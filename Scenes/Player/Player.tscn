@@ -42,17 +42,19 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionableFinder"]
 shape = SubResource("RectangleShape2D_p8mmv")
 
-[node name="Right_Shot" type="Marker2D" parent="."]
+[node name="Shooting" type="Node2D" parent="."]
+
+[node name="Right_Shot" type="Marker2D" parent="Shooting"]
 position = Vector2(128, 0)
 
-[node name="Left_Shot" type="Marker2D" parent="."]
+[node name="Left_Shot" type="Marker2D" parent="Shooting"]
 position = Vector2(-128, 0)
 
-[node name="SpawnerComponent" type="Node2D" parent="."]
+[node name="SpawnerComponent" type="Node2D" parent="Shooting"]
 script = ExtResource("3_64atu")
 scene = ExtResource("4_pg1d5")
 
-[node name="SpawnerComponent2" type="Node2D" parent="."]
+[node name="SpawnerComponent2" type="Node2D" parent="Shooting"]
 script = ExtResource("3_64atu")
 scene = ExtResource("5_hvpy5")
 

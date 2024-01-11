@@ -147,12 +147,13 @@ func shoot_right():
 	spawner_component.spawn(right_shot.global_position)
 
 func shoot_left():
-	spawner_component2.spawn(left_shot.global_position)
+	spawner_component_2.spawn(left_shot.global_position)
 
-@onready var right_shot = $Right_Shot
-@onready var left_shot = $Left_Shot
-@onready var spawner_component: SpawnerComponent = $SpawnerComponent as SpawnerComponent
-@onready var spawner_component2 = $SpawnerComponent2
+@onready var right_shot = $Shooting/Right_Shot
+@onready var left_shot = $Shooting/Left_Shot
+@onready var spawner_component = $Shooting/SpawnerComponent
+@onready var spawner_component_2 = $Shooting/SpawnerComponent2
+
 
 # For when we add animations
 #func update_animations(inputDir):
