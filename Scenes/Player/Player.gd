@@ -26,24 +26,9 @@ func _ready() -> void:
 var dialogue_begin = 0 #dialogue has not commenced
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-
-
-
-	#if Input.is_action_just_pressed("ui_accept"):
 	
-	var actionables = actionable_finder.get_overlapping_areas()
-	if actionables.size() > 0 && dialogue_begin == 0:
-		dialogue_begin = 1
-		actionables[0].action()
-	elif actionables.size() <= 0:
-		dialogue_begin = 0 #run this when outside of dialogue
-		
-		#DialogueManager.show_example_dialogue_balloon(load("res://dialogue/main.dialogue"), "start")
-		#return
-		
+	_dialogue_handle()
 	
-
-
 	gravity_handle(delta)
 	if is_on_floor():
 		airJumpCount = 0
@@ -110,6 +95,18 @@ func friction_handle(delta, inputDir):
 			velocity.x = move_toward(velocity.x, 0, ACCELERATION/3 *delta)
 
 
+func _dialogue_handle():
+	var actionables = actionable_finder.get_overlapping_areas()
+	if actionables.size() > 0 && dialogue_begin == 0:
+		dialogue_begin = 1
+		actionables[0].dialogue()
+	elif actionables.size() <= 0:
+		dialogue_begin = 0 #run this when outside of dialogue
+		
+		#DialogueManager.show_example_dialogue_balloon(load("res://dialogue/main.dialogue"), "start")
+		#return
+
+
 func _take_damage():
 	print("dead")
 
@@ -125,6 +122,8 @@ func _on_power_timer_timeout():
 
 func _weapon_pickup():
 	has_weapon = true
+
+
 
 func _attack(attackPress):
 	if has_weapon == true:

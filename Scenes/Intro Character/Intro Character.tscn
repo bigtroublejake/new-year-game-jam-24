@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgy3f6rfxqyx3"]
+
+[ext_resource type="Texture2D" uid="uid://c4cen5ldnpf8u" path="res://Scenes/Intro Character/9lwpkyww5ay11.png" id="1_78ykk"]
+[ext_resource type="Script" path="res://Scenes/Intro Character/Intro Character.gd" id="1_wepv1"]
+[ext_resource type="Resource" uid="uid://t3da65sjedq3" path="res://Scenes/Intro Character/intro.dialogue" id="2_23cyq"]
+
+[node name="Intro Character" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_78ykk")
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_wepv1")
+dialogue_resource = ExtResource("2_23cyq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-156, 155, 154, 155, 154, -155, -156, -155)

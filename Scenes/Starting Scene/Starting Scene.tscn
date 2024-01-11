@@ -1,16 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://r27yov2ux8cy"]
+[gd_scene load_steps=8 format=3 uid="uid://r27yov2ux8cy"]
 
 [ext_resource type="Script" path="res://Scenes/Starting Scene/Starting Scene.gd" id="1_i1flc"]
 [ext_resource type="PackedScene" uid="uid://bnd5gv03gy6jh" path="res://Scenes/Player/Player.tscn" id="2_7wavv"]
 [ext_resource type="PackedScene" uid="uid://b3t4ewrh13hqf" path="res://Scenes/Slime Enemy/enemy.tscn" id="3_4pcfc"]
 [ext_resource type="PackedScene" uid="uid://dru6ok5cw3qna" path="res://Scenes/Power Up/power_up.tscn" id="4_xwkom"]
 [ext_resource type="PackedScene" uid="uid://ohyd44hvyr41" path="res://Scenes/Weapon/weapon.tscn" id="5_h1ldu"]
+[ext_resource type="PackedScene" uid="uid://bgy3f6rfxqyx3" path="res://Scenes/Intro Character/Intro Character.tscn" id="6_uketn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xr3w"]
 size = Vector2(130, 256)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_i1flc")
+
+[node name="Placeholder Text Nodes" type="Node2D" parent="."]
+z_index = -2
+
+[node name="TextEdit" type="TextEdit" parent="Placeholder Text Nodes"]
+offset_left = 408.0
+offset_top = 24.0
+offset_right = 516.0
+offset_bottom = 86.0
+scale = Vector2(10, 10)
+text = "Sky with city
+"
+editable = false
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+scroll_fit_content_height = true
 
 [node name="Test Platforms" type="StaticBody2D" parent="."]
 
@@ -36,42 +58,26 @@ antialiased = true
 position = Vector2(2712, 416)
 shape = SubResource("RectangleShape2D_3xr3w")
 
-[node name="Player" parent="." instance=ExtResource("2_7wavv")]
-position = Vector2(497, 296)
-scale = Vector2(0.45, 0.45)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Placeholder Text Nodes" type="Node2D" parent="."]
-z_index = -1
-
-[node name="TextEdit" type="TextEdit" parent="Placeholder Text Nodes"]
-offset_left = 408.0
-offset_top = 24.0
-offset_right = 516.0
-offset_bottom = 86.0
-scale = Vector2(10, 10)
-text = "Sky with city
-"
-editable = false
-context_menu_enabled = false
-shortcut_keys_enabled = false
-selecting_enabled = false
-deselect_on_focus_loss_enabled = false
-drag_and_drop_selection_enabled = false
-virtual_keyboard_enabled = false
-middle_mouse_paste_enabled = false
-scroll_fit_content_height = true
-
 [node name="enemy" parent="." instance=ExtResource("3_4pcfc")]
-position = Vector2(256, 272)
+position = Vector2(192, 304)
 speed = 150
 acceleration = 10
 
 [node name="power_up" parent="." instance=ExtResource("4_xwkom")]
-position = Vector2(736, 400)
+position = Vector2(672, 384)
 
 [node name="weapon" parent="." instance=ExtResource("5_h1ldu")]
-position = Vector2(1152, 448)
+position = Vector2(952, 408)
+
+[node name="Player" parent="." instance=ExtResource("2_7wavv")]
+position = Vector2(1136, 368)
+scale = Vector2(0.45, 0.45)
+
+[node name="Intro Character" parent="." instance=ExtResource("6_uketn")]
+z_index = -1
+position = Vector2(1680, 432)
+scale = Vector2(0.5, 0.5)
 
 [connection signal="body_entered" from="Test Platforms/Area2D" to="." method="_on_area_2d_body_entered"]
