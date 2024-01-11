@@ -24,10 +24,15 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 var dialogue_begin = 0 #dialogue has not commenced
+
+var last_direction = 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 
-
+	if velocity.x > 0:
+		last_direction = 1
+	elif velocity.x <0:
+		last_direction = 0
 
 	#if Input.is_action_just_pressed("ui_accept"):
 	
@@ -126,10 +131,28 @@ func _on_power_timer_timeout():
 func _weapon_pickup():
 	has_weapon = true
 
+
 func _attack(attackPress):
 	if has_weapon == true:
 		if attackPress == true:
+			if last_direction == 1:
+				shoot_right()
+			else:
+				shoot_left()
 			print("attack")
+			
+
+
+func shoot_right():
+	spawner_component.spawn(right_shot.global_position)
+
+func shoot_left():
+	spawner_component2.spawn(left_shot.global_position)
+
+@onready var right_shot = $Right_Shot
+@onready var left_shot = $Left_Shot
+@onready var spawner_component: SpawnerComponent = $SpawnerComponent as SpawnerComponent
+@onready var spawner_component2 = $SpawnerComponent2
 
 # For when we add animations
 #func update_animations(inputDir):
