@@ -1,16 +1,60 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3t4ewrh13hqf"]
+[gd_scene load_steps=12 format=3 uid="uid://b3t4ewrh13hqf"]
 
 [ext_resource type="Script" path="res://Scenes/Slime Enemy/enemy.gd" id="1_yi3wr"]
-[ext_resource type="Texture2D" uid="uid://b00v2ovebyuny" path="res://Sprites/Lumerie Slime/Lumerie_Slime_BaseSprite.png" id="2_fwgxw"]
+[ext_resource type="Texture2D" uid="uid://c41d0tud1vn31" path="res://Sprites/Lumerie Slime/Lumerie_Slime_SpriteSheet.png" id="2_rif6g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kygxr"]
+atlas = ExtResource("2_rif6g")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yc6q"]
+atlas = ExtResource("2_rif6g")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fj02k"]
+atlas = ExtResource("2_rif6g")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1u2s"]
+atlas = ExtResource("2_rif6g")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3m4g"]
+atlas = ExtResource("2_rif6g")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v00by"]
+atlas = ExtResource("2_rif6g")
+region = Rect2(704, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ymf8y"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_fwgxw")
+"texture": SubResource("AtlasTexture_kygxr")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yc6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fj02k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1u2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3m4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v00by")
+}],
+"loop": true,
+"name": &"move",
 "speed": 5.0
 }]
 
@@ -27,6 +71,7 @@ script = ExtResource("1_yi3wr")
 position = Vector2(2.5, 0)
 scale = Vector2(2.08, 2.08)
 sprite_frames = SubResource("SpriteFrames_ymf8y")
+animation = &"move"
 
 [node name="detection_area" type="Area2D" parent="."]
 collision_layer = 2

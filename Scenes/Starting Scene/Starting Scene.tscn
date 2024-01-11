@@ -65,7 +65,8 @@ scroll_fit_content_height = true
 
 [node name="enemy" parent="." instance=ExtResource("3_4pcfc")]
 position = Vector2(256, 272)
-speed = 50
+speed = 150
+acceleration = 10
 
 [node name="power_up" parent="." instance=ExtResource("4_xwkom")]
 position = Vector2(736, 400)

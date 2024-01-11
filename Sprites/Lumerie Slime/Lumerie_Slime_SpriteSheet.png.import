@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://01i1oaaw0voe"
-path="res://.godot/imported/Lumerie_Slime_BaseSprite.png-e23da6a6b56d8220af40355a162a0db8.ctex"
+uid="uid://c41d0tud1vn31"
+path="res://.godot/imported/Lumerie_Slime_SpriteSheet.png-656454aa56a121cabbedfe7e3beb742a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Lumerie Slime/Lumerie_Slime_BaseSprite.png"
-dest_files=["res://.godot/imported/Lumerie_Slime_BaseSprite.png-e23da6a6b56d8220af40355a162a0db8.ctex"]
+source_file="res://Sprites/Lumerie Slime/Lumerie_Slime_SpriteSheet.png"
+dest_files=["res://.godot/imported/Lumerie_Slime_SpriteSheet.png-656454aa56a121cabbedfe7e3beb742a.ctex"]
 
 [params]
 
