@@ -14,10 +14,13 @@ var JUMP_VELOCITY = -400.0
 var ACCELERATION = 1_300.0
 var MAX_DOUBLE_JUMPS = 1
 
+
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var airJumpCount : int
 var has_weapon = false
 var isAttacking = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,7 +44,9 @@ func _process(delta: float) -> void:
 		#DialogueManager.show_example_dialogue_balloon(load("res://dialogue/main.dialogue"), "start")
 		#return
 		
-	
+	var mouse_dif_player = get_global_mouse_position().x - global_position.x
+	if has_weapon == true:
+		_weapon_pickup(mouse_dif_player)
 
 
 	gravity_handle(delta)
@@ -51,10 +56,14 @@ func _process(delta: float) -> void:
 	var attackPress = Input.is_action_just_pressed("player_attack")
 	if has_weapon == true:
 		if isAttacking == false:
-			$weapon_slash.play("idle")
+			if mouse_dif_player > 0:
+				$weapon_slash_right.play("idle")
+			elif mouse_dif_player < 0:
+				$weapon_slash_left.play("idle")
 	else:
-		$weapon_slash.visible = false
-	_attack(attackPress)
+		$weapon_slash_right.visible = false
+		$weapon_slash_left.visible = false
+	_attack(attackPress, mouse_dif_player)
 	
 	# Handle jump.
 	var jumpPress = Input.is_action_just_pressed("ui_accept")
@@ -120,34 +129,54 @@ func _take_damage():
 	
 	
 #For power up effect
-func _power_up():
-		SPEED = SPEED*2
+func _power_up(amount):
+		SPEED = SPEED*amount
 		$power_timer.start()
 		print("SPEED UP {0}".format([SPEED]))
+		
 		
 func _on_power_timer_timeout():
 	SPEED = SPEED/2
 	print("SLOW BACK DOWN {0}".format([SPEED]))
 
 
-func _weapon_pickup():
+func _weapon_pickup(mouse_dif_player):
 	has_weapon = true
-	$weapon_slash.visible = true
+	if mouse_dif_player > 0:
+		$weapon_slash_right.visible = true
+		$weapon_slash_left.visible = false
+	if mouse_dif_player < 0:
+		$weapon_slash_left.visible = true
+		$weapon_slash_right.visible = false
 
-func _attack(attackPress):
+
+
+func _attack(attackPress, mouse_dif_player):
 	if has_weapon == true:
 		if attackPress == true:
-			$weapon_slash.play("slash")
-			$weapon_slash/weapon_area/weapon_collision.disabled = false;
+			print(mouse_dif_player)
+			print(global_position.x)
+			print(get_global_mouse_position().x)
+			if mouse_dif_player > 0:
+				$weapon_slash_right.play("slash")
+				$weapon_slash_right/weapon_area/weapon_collision.disabled = false;
+			elif mouse_dif_player < 0:
+				$weapon_slash_left.play("slash")
+				$weapon_slash_left/weapon_area/weapon_collision.disabled = false;
 			print("yes")
 			isAttacking = true;
 			
 
 func _on_weapon_slash_animation_finished():
-	if $weapon_slash.animation == "slash":
+	if $weapon_slash_right.animation == "slash":
 		isAttacking = false;
-		$weapon_slash/weapon_area/weapon_collision.disabled = true;
-
+		$weapon_slash_right/weapon_area/weapon_collision.disabled = true;
+func _on_weapon_slash_left_animation_finished():
+	if $weapon_slash_left.animation == "slash":
+		isAttacking = false;
+		$weapon_slash_left/weapon_area/weapon_collision.disabled = true;
+	
+	
 # For when we add animations
 #func update_animations(inputDir):
 	#if inputDir:
@@ -161,6 +190,10 @@ func _on_weapon_slash_animation_finished():
 		#animated_sprite_2d.play("jump")
 	#elif velocity.y >0:
 		#animated_sprite_2d.play("fall")
+
+
+
+
 
 
 

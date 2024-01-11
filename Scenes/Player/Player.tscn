@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnd5gv03gy6jh"]
+[gd_scene load_steps=23 format=3 uid="uid://bnd5gv03gy6jh"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_jjvbn"]
 [ext_resource type="Texture2D" uid="uid://bmnkwgc8kp0kf" path="res://icon.svg" id="2_djb18"]
 [ext_resource type="Texture2D" uid="uid://p7ml18kn34oh" path="res://Sprites/sword_pixel.png" id="3_wkvnb"]
+[ext_resource type="Script" path="res://Scenes/Player/weapon_slash.gd" id="4_pgm0d"]
+[ext_resource type="Texture2D" uid="uid://f70o52smhcky" path="res://Sprites/sword_pixel_left.png" id="5_fooey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8mmv"]
 size = Vector2(142.222, 142.222)
@@ -65,6 +67,64 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2u5p7"]
 size = Vector2(18, 18.1677)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjshf"]
+atlas = ExtResource("5_fooey")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mebta"]
+atlas = ExtResource("5_fooey")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sixey"]
+atlas = ExtResource("5_fooey")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s05w5"]
+atlas = ExtResource("5_fooey")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4c2p"]
+atlas = ExtResource("5_fooey")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofvhf"]
+atlas = ExtResource("5_fooey")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_30a6c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjshf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mebta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sixey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s05w5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4c2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofvhf")
+}],
+"loop": false,
+"name": &"slash",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxwuf"]
+size = Vector2(44.625, 45.5)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_jjvbn")
 
@@ -96,20 +156,34 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionableFinder"]
 shape = SubResource("RectangleShape2D_p8mmv")
 
-[node name="weapon_slash" type="AnimatedSprite2D" parent="."]
+[node name="weapon_slash_right" type="AnimatedSprite2D" parent="."]
 position = Vector2(93, -7.75)
 scale = Vector2(2.5, 2.51563)
 sprite_frames = SubResource("SpriteFrames_0s7mu")
 animation = &"slash"
+script = ExtResource("4_pgm0d")
 
-[node name="weapon_area" type="Area2D" parent="weapon_slash"]
+[node name="weapon_area" type="Area2D" parent="weapon_slash_right"]
 
-[node name="weapon_collision" type="CollisionShape2D" parent="weapon_slash/weapon_area"]
+[node name="weapon_collision" type="CollisionShape2D" parent="weapon_slash_right/weapon_area"]
 position = Vector2(6.2, -1.35093)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_2u5p7")
 disabled = true
 
+[node name="weapon_slash_left" type="AnimatedSprite2D" parent="."]
+position = Vector2(-96, -9)
+scale = Vector2(2.5, 2.516)
+sprite_frames = SubResource("SpriteFrames_30a6c")
+animation = &"slash"
+
+[node name="weapon_area" type="Area2D" parent="weapon_slash_left"]
+
+[node name="weapon_collision" type="CollisionShape2D" parent="weapon_slash_left/weapon_area"]
+position = Vector2(-4.8, -1.58983)
+scale = Vector2(0.4, 0.397456)
+shape = SubResource("RectangleShape2D_uxwuf")
+
 [connection signal="timeout" from="power_timer" to="." method="_on_power_timer_timeout"]
-[connection signal="animation_finished" from="weapon_slash" to="." method="_on_weapon_slash_animation_finished"]
-[connection signal="animation_looped" from="weapon_slash" to="." method="_on_weapon_slash_animation_looped"]
+[connection signal="animation_finished" from="weapon_slash_right" to="." method="_on_weapon_slash_animation_finished"]
+[connection signal="animation_looped" from="weapon_slash_right" to="." method="_on_weapon_slash_animation_looped"]
+[connection signal="animation_finished" from="weapon_slash_left" to="." method="_on_weapon_slash_left_animation_finished"]

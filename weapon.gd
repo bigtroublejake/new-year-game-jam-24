@@ -12,12 +12,13 @@ func gravity_handle(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var mouse_dif_player = get_global_mouse_position().x - global_position.x
 	gravity_handle(delta)
 	move_and_slide()
 	var body = detection.get_overlapping_bodies()
 	if body.size() > 0:
 		if body[0].has_method("_weapon_pickup"):
-			body[0]._weapon_pickup()
+			body[0]._weapon_pickup(mouse_dif_player)
 			queue_free()
 
 
