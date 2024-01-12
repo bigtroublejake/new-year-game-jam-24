@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
+@onready var dialogue_timeout_timer = $DialogueTimeoutTimer
 
 @onready var actionable_finder: Area2D = $ActionableFinder
 
@@ -23,11 +24,10 @@ var has_weapon = false
 func _ready() -> void:
 	pass # Replace with function body.
 
-var dialogue_begin = 0 #dialogue has not commenced
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	_dialogue_handle()
+	#_dialogue_handle()
 	
 	gravity_handle(delta)
 	if is_on_floor():
@@ -44,7 +44,11 @@ func _process(delta: float) -> void:
 		jump_handle(true)
 	
 	var inputDir = Input.get_axis("ui_left", "ui_right")
-	movement_handle(delta, inputDir)
+	if _dialogue_handle() == false:
+		movement_handle(delta, inputDir)
+	else:
+		velocity.x = move_toward(velocity.x, 0, 1_000 * delta)
+	
 	friction_handle(delta, inputDir)
 	
 	# For coyote timer
@@ -96,15 +100,22 @@ func friction_handle(delta, inputDir):
 
 
 func _dialogue_handle():
+	var dialogue_begin = 0 #dialogue has not commenced
 	var actionables = actionable_finder.get_overlapping_areas()
-	if actionables.size() > 0 && dialogue_begin == 0:
+	if actionables.size() > 0 and dialogue_begin == 0 and dialogue_timeout_timer.time_left == 0:
 		dialogue_begin = 1
 		actionables[0].dialogue()
+		dialogue_timeout_timer.start()
 	elif actionables.size() <= 0:
 		dialogue_begin = 0 #run this when outside of dialogue
 		
 		#DialogueManager.show_example_dialogue_balloon(load("res://dialogue/main.dialogue"), "start")
 		#return
+	#var is_balloon out = 
+	if get_node("../ExampleBalloon") != null:
+		return true
+	else:
+		return false
 
 
 func _take_damage():
