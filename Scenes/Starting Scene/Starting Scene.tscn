@@ -17,10 +17,10 @@ script = ExtResource("1_i1flc")
 z_index = -2
 
 [node name="TextEdit" type="TextEdit" parent="Placeholder Text Nodes"]
-offset_left = 408.0
-offset_top = 24.0
-offset_right = 516.0
-offset_bottom = 86.0
+offset_left = 592.0
+offset_top = 8.0
+offset_right = 700.0
+offset_bottom = 70.0
 scale = Vector2(10, 10)
 text = "Sky with city
 "
@@ -72,12 +72,11 @@ position = Vector2(672, 384)
 position = Vector2(952, 408)
 
 [node name="Player" parent="." instance=ExtResource("2_7wavv")]
-position = Vector2(1136, 368)
-scale = Vector2(0.45, 0.45)
+position = Vector2(1472, 296)
 
 [node name="Intro Character" parent="." instance=ExtResource("6_uketn")]
 z_index = -1
-position = Vector2(1680, 432)
+position = Vector2(1272, 432)
 scale = Vector2(0.5, 0.5)
 
 [connection signal="body_entered" from="Test Platforms/Area2D" to="." method="_on_area_2d_body_entered"]

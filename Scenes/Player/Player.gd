@@ -112,7 +112,7 @@ func _dialogue_handle():
 		#DialogueManager.show_example_dialogue_balloon(load("res://dialogue/main.dialogue"), "start")
 		#return
 	#var is_balloon out = 
-	if get_node("../ExampleBalloon") != null:
+	if $"..".has_node("ExampleBalloon") == true:
 		return true
 	else:
 		return false

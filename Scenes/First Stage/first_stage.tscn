@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://5qyk4ya72cvv"]
+[gd_scene load_steps=3 format=3 uid="uid://5qyk4ya72cvv"]
 
 [ext_resource type="Script" path="res://Scenes/First Stage/first_stage.gd" id="1_ywehe"]
+[ext_resource type="PackedScene" uid="uid://bnd5gv03gy6jh" path="res://Scenes/Player/Player.tscn" id="2_35oky"]
 
 [node name="First Stage" type="Node2D"]
 script = ExtResource("1_ywehe")
+
+[node name="Player" parent="." instance=ExtResource("2_35oky")]
+position = Vector2(368, 448)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(0, 576, 1216, 576, 1216, 704, 0, 704)
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]

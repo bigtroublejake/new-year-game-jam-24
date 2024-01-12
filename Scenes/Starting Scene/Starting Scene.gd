@@ -28,6 +28,7 @@ func _ready() -> void:
 	sprite2d.polygon = collision_polygon_2d.polygon
 
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	camera_2d.position = player.position
@@ -37,10 +38,14 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body):
-	if body == player:
+	if body.is_in_group("Player"):
 		await Fade.fade_out().finished
+		
+		get_tree().change_scene_to_file("res://Scenes/First Stage/first_stage.tscn")
+		
 		print("Scene transition")
 		body.position = startPos
 		Fade.fade_in()
+
 
 
