@@ -55,6 +55,7 @@ func _process(delta: float) -> void:
 	var wasOnFloor = is_on_floor()
 	
 	move_and_slide()
+	update_animations(inputDir)
 	
 	# Also for coyote timer
 	var jusLeftLedge = wasOnFloor and not is_on_floor() and velocity.y >= 0
@@ -102,15 +103,16 @@ func friction_handle(delta, inputDir):
 func _dialogue_handle():
 	var dialogue_begin = 0 #dialogue has not commenced
 	var actionables = actionable_finder.get_overlapping_areas()
-	if actionables.size() > 0 and dialogue_begin == 0 and dialogue_timeout_timer.time_left == 0:
-		dialogue_begin = 1
-		actionables[0].dialogue()
-		dialogue_timeout_timer.start()
-	elif actionables.size() <= 0:
-		dialogue_begin = 0 #run this when outside of dialogue
-		
-		#DialogueManager.show_example_dialogue_balloon(load("res://dialogue/main.dialogue"), "start")
-		#return
+	if Input.is_action_just_pressed("interact"):
+		if actionables.size() > 0 and dialogue_begin == 0 and dialogue_timeout_timer.time_left == 0:
+			dialogue_begin = 1
+			actionables[0].dialogue()
+			dialogue_timeout_timer.start()
+		elif actionables.size() <= 0:
+			dialogue_begin = 0 #run this when outside of dialogue
+			
+			#DialogueManager.show_example_dialogue_balloon(load("res://dialogue/main.dialogue"), "start")
+			#return
 	#var is_balloon out = 
 	if $"..".has_node("ExampleBalloon") == true:
 		return true
@@ -126,7 +128,8 @@ func _take_damage():
 func _power_up():
 		SPEED = SPEED*2
 		$power_timer.start()
-		
+
+
 func _on_power_timer_timeout():
 	SPEED = SPEED/2
 
@@ -142,10 +145,10 @@ func _attack(attackPress):
 			print("attack")
 
 # For when we add animations
-#func update_animations(inputDir):
-	#if inputDir:
-		#if is_on_floor():
-			#animated_sprite_2d.flip_h = (inputDir < 0)
+func update_animations(inputDir):
+	if inputDir:
+		if is_on_floor():
+			sprite_2d.flip_h = (inputDir < 0)
 		#animated_sprite_2d.play("run")
 	#else:
 		#animated_sprite_2d.play("idle")

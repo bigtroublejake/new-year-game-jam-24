@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnd5gv03gy6jh"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_jjvbn"]
-[ext_resource type="Texture2D" uid="uid://bmnkwgc8kp0kf" path="res://icon.svg" id="2_djb18"]
+[ext_resource type="Texture2D" uid="uid://cmpm0sbdpb6v6" path="res://assets/slug.png" id="2_el0x8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8mmv"]
 size = Vector2(142.222, 142.222)
@@ -13,7 +13,8 @@ collision_mask = 7
 script = ExtResource("1_jjvbn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_djb18")
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("2_el0x8")
 
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
 wait_time = 0.15
@@ -39,7 +40,6 @@ collision_mask = 16
 shape = SubResource("RectangleShape2D_p8mmv")
 
 [node name="DialogueTimeoutTimer" type="Timer" parent="."]
-wait_time = 5.0
 one_shot = true
 
 [connection signal="timeout" from="power_timer" to="." method="_on_power_timer_timeout"]
