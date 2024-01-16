@@ -73,6 +73,7 @@ position = Vector2(952, 408)
 
 [node name="Player" parent="." instance=ExtResource("2_7wavv")]
 position = Vector2(1472, 296)
+scale = Vector2(0.85, 0.85)
 
 [node name="Intro Character" parent="." instance=ExtResource("6_uketn")]
 z_index = -1

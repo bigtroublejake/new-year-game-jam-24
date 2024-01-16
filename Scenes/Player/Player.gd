@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 
 
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
 @onready var dialogue_timeout_timer = $DialogueTimeoutTimer
@@ -12,7 +12,7 @@ extends CharacterBody2D
 
 var SPEED = 430.0
 var JUMP_VELOCITY = -400.0
-var ACCELERATION = 1_300.0
+var ACCELERATION = 3_300.0
 var MAX_DOUBLE_JUMPS = 1
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -97,7 +97,7 @@ func friction_handle(delta, inputDir):
 			velocity.x = move_toward(velocity.x, 0, ACCELERATION/15 *delta)
 		else:
 			#floor friction
-			velocity.x = move_toward(velocity.x, 0, ACCELERATION/3 *delta)
+			velocity.x = move_toward(velocity.x, 0, ACCELERATION/2 *delta)
 
 
 func _dialogue_handle():
@@ -143,22 +143,27 @@ func _attack(attackPress):
 	if has_weapon == true:
 		if attackPress == true:
 			print("attack")
+			animated_sprite_2d.play("attack")
+			attack_finish = false
 
 # For when we add animations
+var attack_finish : bool = true
 func update_animations(inputDir):
-	if inputDir:
+	if inputDir and attack_finish == true:
 		if is_on_floor():
-			sprite_2d.flip_h = (inputDir < 0)
-		#animated_sprite_2d.play("run")
-	#else:
-		#animated_sprite_2d.play("idle")
-	#
+			animated_sprite_2d.flip_h = (inputDir > 0)
+		animated_sprite_2d.play("run")
+	elif attack_finish == true:
+		animated_sprite_2d.play("idle")
+	
 	#if velocity.y < 0:
 		#animated_sprite_2d.play("jump")
 	#elif velocity.y >0:
 		#animated_sprite_2d.play("fall")
 
 
-
-
-
+func _on_animated_sprite_2d_animation_looped():
+	#print("anim looped")
+	if attack_finish == false:
+		attack_finish = true
+		animated_sprite_2d.play("idle")
