@@ -15,6 +15,8 @@ var SPEED = 430.0
 var JUMP_VELOCITY = -400.0
 var ACCELERATION = 3_300.0
 var MAX_DOUBLE_JUMPS = 1
+var PARTICLE_POS : Vector2
+
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var airJumpCount : int
@@ -23,6 +25,7 @@ var has_weapon = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	PARTICLE_POS = abs(gpu_particles_2d.position)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -160,7 +163,7 @@ func update_animations(inputDir):
 		animated_sprite_2d.play("idle")
 	
 	if inputDir:
-		gpu_particles_2d.position.x = 70 * inputDir
+		gpu_particles_2d.position.x = PARTICLE_POS.x * inputDir
 	
 	#if velocity.y < 0:
 		#animated_sprite_2d.play("jump")
