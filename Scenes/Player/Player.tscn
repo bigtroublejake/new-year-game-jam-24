@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bnd5gv03gy6jh"]
+[gd_scene load_steps=21 format=3 uid="uid://bnd5gv03gy6jh"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_jjvbn"]
 [ext_resource type="Texture2D" uid="uid://dj125ynshphvf" path="res://Sprites/Player/PlayerCharacterSprite.png" id="2_uhqwy"]
@@ -62,7 +62,7 @@ region = Rect2(896, 0, 64, 64)
 [sub_resource type="SpriteFrames" id="SpriteFrames_qj8dd"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_vrby8")
 }, {
 "duration": 1.0,
@@ -122,6 +122,19 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8mmv"]
 size = Vector2(142.222, 142.222)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l4k8i"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 40.0
+angle_max = 360.0
+radial_velocity_min = 5.0
+radial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p5o0o"]
+size = Vector2(15, 15)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(0.45, 0.45)
 collision_layer = 7
@@ -160,6 +173,16 @@ shape = SubResource("RectangleShape2D_p8mmv")
 
 [node name="DialogueTimeoutTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-70, 0)
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_l4k8i")
+texture = SubResource("PlaceholderTexture2D_p5o0o")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="timeout" from="power_timer" to="." method="_on_power_timer_timeout"]

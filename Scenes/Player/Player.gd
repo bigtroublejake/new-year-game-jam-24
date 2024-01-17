@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
 @onready var dialogue_timeout_timer = $DialogueTimeoutTimer
+@onready var gpu_particles_2d = $GPUParticles2D
 
 @onready var actionable_finder: Area2D = $ActionableFinder
 
@@ -141,9 +142,11 @@ func _weapon_pickup():
 
 func _attack(attackPress):
 	if has_weapon == true:
-		if attackPress == true:
+		if attackPress == true and attack_finish == true:
 			print("attack")
 			animated_sprite_2d.play("attack")
+			gpu_particles_2d.emitting = false
+			gpu_particles_2d.emitting = true
 			attack_finish = false
 
 # For when we add animations
@@ -156,6 +159,9 @@ func update_animations(inputDir):
 	elif attack_finish == true:
 		animated_sprite_2d.play("idle")
 	
+	if inputDir:
+		gpu_particles_2d.position.x = 70 * inputDir
+	
 	#if velocity.y < 0:
 		#animated_sprite_2d.play("jump")
 	#elif velocity.y >0:
@@ -163,7 +169,7 @@ func update_animations(inputDir):
 
 
 func _on_animated_sprite_2d_animation_looped():
-	#print("anim looped")
 	if attack_finish == false:
+		print("anim looped")
 		attack_finish = true
 		animated_sprite_2d.play("idle")
